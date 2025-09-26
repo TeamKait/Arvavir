@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import {Button} from "@/components/ui/button";
-import {Icon} from "@iconify/vue";
-import {useColorMode} from "@vueuse/core";
-
-const mode = useColorMode();
+import Header from "@/components/header/Header.vue";
 </script>
 
 <template>
-
+<Header/>
 </template>
 
 <style scoped></style>
