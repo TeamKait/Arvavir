@@ -3,13 +3,11 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Icon} from "@iconify/vue"
 import CircleButton from "@/components/customUI/CircleButton.vue";
 import WithLabel from "@/utils/components/WithLabel.vue";
+import BudgetOtherFunctions from "@/components/main/BudgetOtherFunctions.vue";
 </script>
 
 <template>
   <Card>
-    <CardHeader>
-      <CardTitle>Бюджет</CardTitle>
-    </CardHeader>
     <CardContent class="flex-center flex-col gap-10">
       <div class="flex-center flex-col">
         <h1 class="text-xl text-muted-foreground">На сегодня</h1>
@@ -33,11 +31,7 @@ import WithLabel from "@/utils/components/WithLabel.vue";
         </WithLabel>
 
         <!-- другие функции -->
-        <WithLabel label="Другое" position="bottom" class="w-20">
-          <CircleButton>
-            <Icon icon="radix-icons:dots-vertical" class="size-7"/>
-          </CircleButton>
-        </WithLabel>
+        <BudgetOtherFunctions/>
       </div>
     </CardContent>
   </Card>
