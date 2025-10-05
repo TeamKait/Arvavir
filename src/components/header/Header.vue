@@ -9,7 +9,7 @@ const otherRoutes = ['/settings', '/about', '/admin'];
 <template>
   <div class="w-full h-25 flex items-center justify-between border-b">
     <!-- home route -->
-    <RouteButton to="/" class="text-6xl font-bold border-r h-full flex-center px-10"/>
+    <RouteButton to="/" class="text-6xl font-semibold border-r h-full flex-center px-10"/>
 
     <!-- other routes -->
     <div class="flex-center w-full !justify-evenly text-3xl h-full">

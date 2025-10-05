@@ -9,6 +9,7 @@ const props = defineProps({
 })
 </script>
 
+<!-- TODO: skeleton for loading icons -->
 <template>
   <Button class="text-xl flex justify-start">
     <template v-if="props.textStart">

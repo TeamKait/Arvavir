@@ -5,7 +5,7 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'Arvavir',
+            name: 'ARVAVIR',
             component: () => import('@/views/HomeView.vue')
         },
         {
