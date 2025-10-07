@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import CircleButton from "@/components/customUI/CircleButton.vue";
 import {Icon} from "@iconify/vue";
 import WithLabel from "@/utils/components/WithLabel.vue";
 import {DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {useCommonDialog} from "@/stores/CommonDialog.ts";
 import {Button} from "@/components/ui/button";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
+import CircleButton from "@/components/customUI/CircleButton.vue";
 
 const dialog = useCommonDialog();
 </script>
@@ -14,7 +14,7 @@ const dialog = useCommonDialog();
   <WithLabel label="Другое" position="bottom" class="w-20">
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
-        <CircleButton>
+        <CircleButton class="size-18">
           <Icon icon="radix-icons:dots-vertical" class="size-7"/>
         </CircleButton>
       </DropdownMenuTrigger>

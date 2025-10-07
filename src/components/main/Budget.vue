@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Icon} from "@iconify/vue"
-import CircleButton from "@/components/customUI/CircleButton.vue";
 import WithLabel from "@/utils/components/WithLabel.vue";
 import BudgetOtherFunctions from "@/components/main/BudgetOtherFunctions.vue";
+import {Button} from "@/components/ui/button";
+import CircleButton from "@/components/customUI/CircleButton.vue";
 </script>
 
 <template>
@@ -18,14 +19,14 @@ import BudgetOtherFunctions from "@/components/main/BudgetOtherFunctions.vue";
       <div class="flex gap-2">
         <!-- зачисление -->
         <WithLabel label="Зачисление" position="bottom" class="w-20">
-          <CircleButton>
+          <CircleButton class="size-18">
             <Icon icon="radix-icons:double-arrow-up" class="size-7"/>
           </CircleButton>
         </WithLabel>
 
         <!-- трата -->
         <WithLabel label="Трата" position="bottom" class="w-20">
-          <CircleButton>
+          <CircleButton class="size-18">
             <Icon icon="radix-icons:double-arrow-down" class="size-7"/>
           </CircleButton>
         </WithLabel>

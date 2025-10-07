@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import {Button} from "@/components/ui/button";
 </script>
 
 <template>
-  <button class="group aspect-square">
-    <div class="p-5 flex-center rounded-full border transition-colors group-hover:bg-secondary size-min aspect-square">
-      <slot/>
-    </div>
-  </button>
+  <Button size="icon" variant="outline" class="flex-center rounded-full">
+    <slot/>
+  </Button>
 </template>
