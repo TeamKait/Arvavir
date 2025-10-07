@@ -4,6 +4,6 @@ import Budget from "@/components/main/Budget.vue";
 
 <template>
 <div class="flex-center">
-  <Budget/>
+  <RouterView/>
 </div>
 </template>

@@ -4,7 +4,7 @@ import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 </script>
 
 <template>
-  <RouterLink to="/profile" class="flex items-center px-10 gap-3 hover:underline border-l h-full">
+  <RouterLink to="/login" class="flex items-center px-10 gap-3 hover:underline border-l h-full">
     <Avatar class="size-15">
       <AvatarFallback class="text-3xl">
         <Icon icon="radix-icons:person"/>

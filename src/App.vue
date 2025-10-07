@@ -2,16 +2,19 @@
 import Header from "@/components/header/Header.vue";
 import Main from "@/components/main/Main.vue";
 import CommonDialog from "@/components/CommonDialog.vue";
+import {Toaster} from '@/components/ui/sonner'
+import 'vue-sonner/style.css'
 </script>
 
 <template>
   <Header/>
   <Main class="m-3"/>
 
-  <!-- чтобы не делать диалог на каждый раз-->
-  <CommonDialog>
+  <!-- диалог на весь экран -->
+  <CommonDialog/>
 
-  </CommonDialog>
+  <!-- уведомления -->
+  <Toaster theme="system" :close-button="true" :toast-options="{
+    class: '!text-xl flex items-center'
+  }"/>
 </template>
-
-<style scoped></style>
