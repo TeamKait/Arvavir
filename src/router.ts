@@ -11,12 +11,12 @@ const router = createRouter({
         {
             path: '/login',
             component: () => import('@/views/Auth.vue'),
-            props: { login: true }
+            props: {login: true}
         },
         {
             path: '/register',
             component: () => import('@/views/Auth.vue'),
-            props: { login: false }
+            props: {login: false}
         },
         {
             path: '/about',
@@ -33,6 +33,13 @@ const router = createRouter({
             name: 'Админ Панель',
             component: () => import('@/views/AdminPanel.vue')
         },
+
+        // 404 page
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'NotFound',
+            component: () => import('@/views/NotFound.vue')
+        }
     ],
 })
 
