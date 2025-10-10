@@ -16,8 +16,8 @@ export const useCommonDialog = defineStore('common dialog', () => {
     const label = ref("");
     const open = ref(false);
 
-    function Open(dialogLabel: string, dialogComponents: ComponentWithProps[] | ComponentWithProps) {
-        components.value = Array.isArray(dialogComponents) ?  dialogComponents : [dialogComponents];
+    function Open(dialogLabel: string, ...dialogComponents: ComponentWithProps[]) {
+        components.value = dialogComponents;
         label.value = dialogLabel;
         open.value = true;
     }

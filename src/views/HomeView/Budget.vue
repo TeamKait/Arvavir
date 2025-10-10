@@ -6,6 +6,7 @@ import BudgetOtherFunctions from "@/views/HomeView/BudgetOtherFunctions.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
 import {ComponentWithProps, useCommonDialog} from "@/stores/CommonDialog.ts";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
+import SpendingSelect from "@/components/customUI/spending/SpendingSelect.vue";
 
 const dialog = useCommonDialog();
 </script>
@@ -36,7 +37,8 @@ const dialog = useCommonDialog();
           <CircleButton
               @click="dialog.Open('Новая трата',
               new ComponentWithProps(ChangeBudgetDialog,
-              {defaultValue: 0, options: [-500, -200, -100, 0, 100, 200, 500], mode: 'change'}))"
+              {defaultValue: 0, options: [-500, -200, -100, 0, 100, 200, 500], mode: 'change'}),
+              new ComponentWithProps(SpendingSelect))"
               class="size-18">
             <Icon icon="radix-icons:double-arrow-down" class="size-7"/>
           </CircleButton>
