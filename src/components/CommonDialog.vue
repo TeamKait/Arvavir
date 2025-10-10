@@ -16,7 +16,7 @@ function handleOpenChange(value: boolean) {
       <DialogTitle>{{ config.label }}</DialogTitle>
     </DialogHeader>
 
-    <component :is="config.component"/>
+    <component v-for="(c, i) in config.components" :is="c.component" v-bind="c.props" :key="i"/>
   </DialogContent>
 </Dialog>
 </template>

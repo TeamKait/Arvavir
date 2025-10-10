@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import {Icon} from "@iconify/vue";
 import {Button} from "@/components/ui/button";
 import {useCommonDialog} from "@/stores/CommonDialog.ts";
 import {ref} from "vue";
-import NumberSetSuggestions from "@/components/customUI/NumberSetSuggestions.vue";
-import NumberChangeSuggestions from "@/components/customUI/NumberChangeSuggestions.vue";
+import NumberSetSuggestions from "@/components/customUI/suggestions/NumberSetSuggestions.vue";
+import NumberChangeSuggestions from "@/components/customUI/suggestions/NumberChangeSuggestions.vue";
+
+
+const props = defineProps<{
+  defaultValue?: number
+  options?: number[]
+  mode?: 'set' | 'change'
+}>()
+
 
 const commonDialog = useCommonDialog();
 
-const budget = ref(500);
+const budget = ref(props.defaultValue);
 </script>
 
 <template>
@@ -19,7 +26,8 @@ const budget = ref(500);
     </div>
   </div>
 
-  <NumberChangeSuggestions v-model="budget" :options="[-10000, -1000, 0, 1000, 10000]"/>
+  <NumberChangeSuggestions v-if="props.mode == 'change'" v-model="budget" :options="props.options"/>
+  <NumberSetSuggestions v-else v-model="budget" :options="props.options"/>
 
   <div class="flex items-center justify-end w-full pt-5 gap-2 border-t">
     <Button @click="commonDialog.Close" variant="outline">Отмена</Button>

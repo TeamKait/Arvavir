@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import IconButton from "@/components/customUI/IconButton.vue";
+import IconButton from "@/components/customUI/buttons/IconButton.vue";
 import {ref, watch} from "vue";
 import {Card} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";

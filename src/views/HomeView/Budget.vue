@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent} from "@/components/ui/card";
 import {Icon} from "@iconify/vue"
 import WithLabel from "@/utils/components/WithLabel.vue";
-import BudgetOtherFunctions from "@/components/main/BudgetOtherFunctions.vue";
-import {Button} from "@/components/ui/button";
-import CircleButton from "@/components/customUI/CircleButton.vue";
+import BudgetOtherFunctions from "@/views/HomeView/BudgetOtherFunctions.vue";
+import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
+import {ComponentWithProps, useCommonDialog} from "@/stores/CommonDialog.ts";
+import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
+
+const dialog = useCommonDialog();
 </script>
 
 <template>
@@ -19,14 +22,22 @@ import CircleButton from "@/components/customUI/CircleButton.vue";
       <div class="flex gap-2">
         <!-- зачисление -->
         <WithLabel label="Зачисление" position="bottom" class="w-20">
-          <CircleButton class="size-18">
+          <CircleButton
+              @click="dialog.Open('Новое зачисление',
+              new ComponentWithProps(ChangeBudgetDialog,
+                  {defaultValue: 0, options: [-500, -100, 0, 100, 500], mode: 'change'}))"
+              class="size-18">
             <Icon icon="radix-icons:double-arrow-up" class="size-7"/>
           </CircleButton>
         </WithLabel>
 
         <!-- трата -->
         <WithLabel label="Трата" position="bottom" class="w-20">
-          <CircleButton class="size-18">
+          <CircleButton
+              @click="dialog.Open('Новая трата',
+              new ComponentWithProps(ChangeBudgetDialog,
+              {defaultValue: 0, options: [-500, -200, -100, 0, 100, 200, 500], mode: 'change'}))"
+              class="size-18">
             <Icon icon="radix-icons:double-arrow-down" class="size-7"/>
           </CircleButton>
         </WithLabel>

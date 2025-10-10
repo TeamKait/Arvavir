@@ -6,7 +6,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'ARVAVIR',
-            component: () => import('@/views/HomeView.vue')
+            component: () => import('@/views/HomeView/HomeView.vue')
         },
         {
             path: '/login',

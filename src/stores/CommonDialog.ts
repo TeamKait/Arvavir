@@ -1,20 +1,30 @@
 import {ref, computed, type Component} from 'vue'
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
+
+export class ComponentWithProps {
+    public component: Component
+    public props: object | null
+
+    public constructor(component: Component, props: object | null = null) {
+        this.component = component
+        this.props = props
+    }
+}
 
 export const useCommonDialog = defineStore('common dialog', () => {
-  const component = ref<Component>();
-  const label = ref("");
-  const open = ref(false);
+    const components = ref<Array<ComponentWithProps>>([])
+    const label = ref("");
+    const open = ref(false);
 
-  function Open(dialogLabel:string, dialogComponent: Component){
-    component.value = dialogComponent;
-    label.value = dialogLabel;
-    open.value = true;
-  }
+    function Open(dialogLabel: string, dialogComponents: ComponentWithProps[] | ComponentWithProps) {
+        components.value = Array.isArray(dialogComponents) ?  dialogComponents : [dialogComponents];
+        label.value = dialogLabel;
+        open.value = true;
+    }
 
-  function Close(){
-    open.value = false;
-  }
+    function Close() {
+        open.value = false;
+    }
 
-  return {component, label, open, Open, Close}
+    return {components, label, open, Open, Close}
 })

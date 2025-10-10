@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RouteButton from "@/components/customUI/RouteButton.vue";
+import RouteButton from "@/components/customUI/buttons/RouteButton.vue";
 import UserLink from "@/components/header/UserLink.vue";
 import ThemeSelector from "@/components/header/ThemeSelector.vue";
 

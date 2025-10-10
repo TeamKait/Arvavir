@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Budget from "@/components/main/Budget.vue";
+import Budget from "@/views/HomeView/Budget.vue";
 </script>
 
 <template>
