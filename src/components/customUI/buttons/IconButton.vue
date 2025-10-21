@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import {Button} from "@/components/ui/button";
 import {Icon} from "@iconify/vue";
+import type {HTMLAttributes} from "vue";
 
 const props = defineProps({
   icon: {type: String, required: true},
-  textStart: {type: Boolean, default: false},
-  iconClass: {type: String, default: 'size-6'}
+  textStart: {type: Boolean, default: true},
+  iconClass: {type: String, default: "size-5"}
 })
 </script>
 

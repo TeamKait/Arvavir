@@ -22,7 +22,7 @@ const dialog = useCommonDialog();
 
       <div class="flex gap-2">
         <!-- зачисление -->
-        <WithLabel label="Зачисление" position="bottom" class="w-20">
+        <WithLabel label="Зачисление" position="bottom" class="w-20 flex-center">
           <CircleButton
               @click="dialog.Open('Новое зачисление',
               new ComponentWithProps(ChangeBudgetDialog,
@@ -33,7 +33,7 @@ const dialog = useCommonDialog();
         </WithLabel>
 
         <!-- трата -->
-        <WithLabel label="Трата" position="bottom" class="w-20">
+        <WithLabel label="Трата" position="bottom" class="w-20 flex-center">
           <CircleButton
               @click="dialog.Open('Новая трата',
               new ComponentWithProps(ChangeBudgetDialog,

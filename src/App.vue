@@ -16,7 +16,7 @@ import SpendingSelect from "@/components/customUI/spending/SpendingSelect.vue";
   <CommonDialog/>
 
   <!-- уведомления -->
-  <Toaster theme="system" :close-button="true" :toast-options="{
+  <Toaster theme="system" :close-button="true" :rich-colors="true" :toast-options="{
     class: '!text-xl flex items-center'
   }"/>
 </template>

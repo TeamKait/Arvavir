@@ -1,22 +1,61 @@
 <script setup lang="ts">
-import {useRoute, useRouter} from 'vue-router';
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {computed, ref} from "vue";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Checkbox} from "@/components/ui/checkbox";
+import {createUser} from "@/ts/firebase/users/user.controller.ts";
+import {toast} from "vue-sonner";
+import {useRouter} from "vue-router";
+import {Spinner} from "@/components/ui/spinner";
+import {LoadingAction} from "@/ts/TryAction.ts";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 
 const props = defineProps({
   login: Boolean
 })
 
+const router = useRouter();
+
 const label = computed(() => props.login ? 'Войти' : 'Регистрация')
+
+const emailInput = ref("");
+const passwordInput = ref("");
+const repeatPasswordInput = ref("");
+
+const loading = ref(false);
+
+const auth = getAuth();
+async function HandleButton(){
+  //login
+  if(props.login){
+    await Login()
+  }
+  //register
+  else{
+    if(passwordInput.value !=  repeatPasswordInput.value){
+      toast.error("Пароли не сходятся")
+      return
+    }
+
+    await LoadingAction(() => createUser(emailInput.value, passwordInput.value), loading)
+    await Login()
+  }
+  await router.push("/")
+}
+
+async function Login(){
+  await LoadingAction(async () => {
+    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+    toast.success("Добро пожаловать!")
+  }, loading)
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-1">
-    <Tabs>
+    <Tabs class="flex-1">
       <TabsList class="w-full">
         <TabsTrigger value="Войти" as-child>
           <RouterLink to="/login">
@@ -40,18 +79,18 @@ const label = computed(() => props.login ? 'Войти' : 'Регистраци�
       <CardContent class="flex flex-col justify-between h-80 w-100">
         <div class="flex flex-col gap-2">
           <div>
-            <Label for="login">Логин</Label>
-            <Input id="login" placeholder="Логин"/>
+            <Label for="login">email</Label>
+            <Input v-model="emailInput" id="login" placeholder="email"/>
           </div>
 
           <div>
             <Label for="password">Пароль</Label>
-            <Input id="password" placeholder="Пароль"/>
+            <Input v-model="passwordInput" type="password" id="password" placeholder="Пароль"/>
           </div>
 
           <div v-if="!login">
             <Label for="password-repeat">Повтор пароля</Label>
-            <Input id="password-repeat" placeholder="Повтор пароля"/>
+            <Input v-model="repeatPasswordInput" type="password" id="password-repeat" placeholder="Повтор пароля"/>
           </div>
         </div>
 
@@ -60,7 +99,12 @@ const label = computed(() => props.login ? 'Войти' : 'Регистраци�
             <Checkbox id="remember-me-cb"/>
             <Label for="remember-me-cb" class="select-none">Запомнить меня</Label>
           </div>
-          <Button class="w-full">{{ label }}</Button>
+          <Button @click="HandleButton" class="w-full">
+            <div class="flex-center relative">
+              {{ label }}
+              <Spinner v-if="loading" class="absolute -right-5"/>
+            </div>
+          </Button>
         </div>
       </CardContent>
     </Card>

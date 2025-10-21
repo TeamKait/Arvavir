@@ -21,7 +21,7 @@ const router = createRouter({
         {
             path: '/about',
             name: 'О проекте',
-            component: () => import('@/views/AboutView.vue')
+            component: () => import('@/views/AboutView/AboutView.vue')
         },
         {
             path: '/settings',
@@ -31,7 +31,7 @@ const router = createRouter({
         {
             path: '/admin',
             name: 'Админ Панель',
-            component: () => import('@/views/AdminPanel.vue')
+            component: () => import('@/views/AdminView/AdminPanel.vue')
         },
 
         // 404 page

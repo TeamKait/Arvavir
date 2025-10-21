@@ -61,7 +61,8 @@ watch(selected, () => {
         <IconButton v-for="(icon, mode) in modes"
                     @click="selected = mode"
                     :icon="icon"
-                    :variant="selected == mode ? 'default' : 'outline'">
+                    :variant="selected == mode ? 'default' : 'outline'"
+                    class="flex justify-between">
           {{ GetTitle(mode) }}
         </IconButton>
       </Card>

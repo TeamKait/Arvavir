@@ -10,7 +10,7 @@ function IsPos(positionName: string): boolean {
 </script>
 
 <template>
-<div class="flex-center gap-1" :class="{'flex-col':IsPos('top') || IsPos('bottom')}">
+<div class="flex gap-1" :class="{'flex-col':IsPos('top') || IsPos('bottom')}">
   <template v-if="IsPos('left') || IsPos('top')">
     <label>{{ props.label }}</label>
   </template>

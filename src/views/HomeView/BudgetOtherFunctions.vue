@@ -11,7 +11,7 @@ const dialog = useCommonDialog();
 </script>
 
 <template>
-  <WithLabel label="Другое" position="bottom" class="w-20">
+  <WithLabel label="Другое" position="bottom" class="w-20 flex-center">
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
         <CircleButton class="size-18">
