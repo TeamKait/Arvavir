@@ -6,9 +6,21 @@ import BudgetOtherFunctions from "@/views/HomeView/BudgetOtherFunctions.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
 import {ComponentWithProps, useCommonDialog} from "@/stores/CommonDialog.ts";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
-import SpendingSelect from "@/components/customUI/spending/SpendingSelect.vue";
+import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
+import {ref} from "vue";
+import SpendingCategory from "@/components/dialogs/spending/SpendingCategory.vue";
+import {SpendingCategories} from "@/ts/AccountData/SpendingCategoriesData.ts";
 
 const dialog = useCommonDialog();
+
+const results = ref<Array<any>>([])
+
+async function GetResults() {
+  results.value = await dialog.GetResults('Новая трата',
+      new ComponentWithProps(ChangeBudgetDialog,
+          {defaultValue: 0, options: [-500, -200, -100, 0, 100, 200, 500], mode: 'change'}),
+      new ComponentWithProps(SpendingSelect))
+}
 </script>
 
 <template>
@@ -24,7 +36,7 @@ const dialog = useCommonDialog();
         <!-- зачисление -->
         <WithLabel label="Зачисление" position="bottom" class="w-20 flex-center">
           <CircleButton
-              @click="dialog.Open('Новое зачисление',
+              @click="dialog.GetResults('Новое зачисление',
               new ComponentWithProps(ChangeBudgetDialog,
                   {defaultValue: 0, options: [-500, -100, 0, 100, 500], mode: 'change'}))"
               class="size-18">
@@ -35,10 +47,7 @@ const dialog = useCommonDialog();
         <!-- трата -->
         <WithLabel label="Трата" position="bottom" class="w-20 flex-center">
           <CircleButton
-              @click="dialog.Open('Новая трата',
-              new ComponentWithProps(ChangeBudgetDialog,
-              {defaultValue: 0, options: [-500, -200, -100, 0, 100, 200, 500], mode: 'change'}),
-              new ComponentWithProps(SpendingSelect))"
+              @click="GetResults"
               class="size-18">
             <Icon icon="radix-icons:double-arrow-down" class="size-7"/>
           </CircleButton>

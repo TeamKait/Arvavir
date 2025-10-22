@@ -95,7 +95,7 @@ async function Login(){
         </div>
 
         <div class="flex flex-col gap-2">
-          <div v-if="!login" class="flex items-center gap-2">
+          <div v-if="login" class="flex items-center gap-2">
             <Checkbox id="remember-me-cb"/>
             <Label for="remember-me-cb" class="select-none">Запомнить меня</Label>
           </div>

@@ -4,12 +4,10 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select"
-import SpendingCategory from "@/components/customUI/spending/SpendingCategory.vue";
-import {SpendingCategories} from "@/ts/SpendingCategoriesData.ts";
+import SpendingCategory from "@/components/dialogs/spending/SpendingCategory.vue";
+import {SpendingCategories} from "@/ts/AccountData/SpendingCategoriesData.ts";
 
 const selected = defineModel({default: 0});
 </script>

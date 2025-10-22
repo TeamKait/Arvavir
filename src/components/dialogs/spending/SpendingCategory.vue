@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Icon} from "@iconify/vue"
-import {SpendingCategories, SpendingCategory} from "@/ts/SpendingCategoriesData.ts";
+import {SpendingCategories, SpendingCategory} from "@/ts/AccountData/SpendingCategoriesData.ts";
 
 const props = defineProps({
   category: {type: SpendingCategory, default: SpendingCategories[0]}

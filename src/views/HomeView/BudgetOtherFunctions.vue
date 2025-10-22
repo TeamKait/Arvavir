@@ -3,7 +3,6 @@ import {Icon} from "@iconify/vue";
 import WithLabel from "@/utils/components/WithLabel.vue";
 import {DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {ComponentWithProps, useCommonDialog} from "@/stores/CommonDialog.ts";
-import {Button} from "@/components/ui/button";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
 
@@ -21,7 +20,7 @@ const dialog = useCommonDialog();
 
       <DropdownMenuContent>
         <DropdownMenuItem as-child>
-          <button @click="dialog.Open(
+          <button @click="dialog.GetResults(
               'Изменить бюджет',
               new ComponentWithProps(ChangeBudgetDialog,
               {defaultValue: 0, options: [-10000, -1000, 0, 1000, 10000], mode: 'change'}))">

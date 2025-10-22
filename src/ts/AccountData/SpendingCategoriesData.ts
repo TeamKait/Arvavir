@@ -1,12 +1,23 @@
+import {MoneyOperation} from "@/ts/AccountData/MoneyOperation.ts";
+
 export class SpendingCategory {
     public name: string;
     public color: string;
     public icon: string;
 
-    public constructor(name: string, color: string,  icon: string) {
+    public constructor(name: string, color: string, icon: string) {
         this.name = name;
         this.color = color;
         this.icon = icon;
+    }
+}
+
+export class Spending extends MoneyOperation {
+    public category: SpendingCategory;
+
+    public constructor(amount: number, date: Date, category: SpendingCategory) {
+        super(amount, date);
+        this.category = category;
     }
 }
 
