@@ -6,7 +6,7 @@ export async function TryAction(action: Function) {
         return await action();
     } catch (e) {
         console.error(e)
-        toast.error("Ошибка");
+        toast.error("Ошибка: " + (e as Error).message);
         return null
     }
 }

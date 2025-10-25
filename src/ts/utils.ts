@@ -10,3 +10,8 @@ export function Clamp(value: number, min: number | undefined, max: number | unde
     if (max === undefined) return Math.max(value, min!)
     return Math.min(Math.max(value, min), max)
 }
+
+export function NotImplemented(){
+    toast.warning("NOT IMPLEMENTED")
+    console.error("NOT IMPLEMENTED")
+}

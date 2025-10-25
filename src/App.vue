@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import Header from "@/components/header/Header.vue";
-import Main from "@/components/Main.vue";
 import CommonDialog from "@/components/CommonDialog.vue";
 import {Toaster} from '@/components/ui/sonner'
 import 'vue-sonner/style.css'
-import SpendingCategory from "@/components/dialogs/spending/SpendingCategory.vue";
-import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
 </script>
 
 <template>
   <Header/>
-  <Main class="m-3"/>
+  <div class="flex-center mt-5">
+    <RouterView/>
+  </div>
 
   <!-- диалог на весь экран -->
   <CommonDialog/>

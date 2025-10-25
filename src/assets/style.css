@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -87,6 +88,18 @@
 
 .flex-center{
   @apply flex items-center justify-center;
+}
+
+.money::after{
+  margin: 0.5ch;
+  content: "₽";
+}
+
+.income{
+  @apply text-emerald-500
+}
+.income::before{
+  content: "+";
 }
 
 .menu-enter-active, .menu-leave-active {

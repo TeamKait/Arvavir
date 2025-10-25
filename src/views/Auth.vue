@@ -11,6 +11,7 @@ import {useRouter} from "vue-router";
 import {Spinner} from "@/components/ui/spinner";
 import {LoadingAction} from "@/ts/TryAction.ts";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import IconButton from "@/components/customUI/buttons/IconButton.vue";
 
 const props = defineProps({
   login: Boolean
@@ -25,6 +26,7 @@ const passwordInput = ref("");
 const repeatPasswordInput = ref("");
 
 const loading = ref(false);
+const passwordVisible = ref(false);
 
 const auth = getAuth();
 async function HandleButton(){
@@ -50,6 +52,17 @@ async function Login(){
     await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
     toast.success("Добро пожаловать!")
   }, loading)
+}
+
+function GeneratePassword(){
+  const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$*'
+  let password = ''
+  for (let i = 0; i < 12; i++) {
+    password += letters[Math.floor(Math.random() * letters.length)]
+  }
+
+  passwordInput.value = password
+  repeatPasswordInput.value = password
 }
 </script>
 
@@ -85,12 +98,18 @@ async function Login(){
 
           <div>
             <Label for="password">Пароль</Label>
-            <Input v-model="passwordInput" type="password" id="password" placeholder="Пароль"/>
+            <div class="relative">
+              <Input v-model="passwordInput" :type="passwordVisible ? 'text' : 'password'" id="password" placeholder="Пароль"/>
+              <div class="flex-center absolute right-0 top-0 flex">
+                <IconButton v-if="!login" @click="GeneratePassword" icon="lucide:dice-5" variant="ghost" size="icon" class="flex-center"/>
+                <IconButton @click="passwordVisible = !passwordVisible" :icon="passwordVisible ? 'radix-icons:eye-open' : 'radix-icons:eye-closed'" variant="ghost" size="icon" class="flex-center"/>
+              </div>
+            </div>
           </div>
 
           <div v-if="!login">
             <Label for="password-repeat">Повтор пароля</Label>
-            <Input v-model="repeatPasswordInput" type="password" id="password-repeat" placeholder="Повтор пароля"/>
+            <Input v-model="repeatPasswordInput" :type="passwordVisible ? 'text' : 'password'" id="password-repeat" placeholder="Повтор пароля"/>
           </div>
         </div>
 

@@ -3,16 +3,18 @@ import {Button} from "@/components/ui/button";
 import {Icon} from "@iconify/vue";
 import type {HTMLAttributes} from "vue";
 
-const props = defineProps({
-  icon: {type: String, required: true},
-  textStart: {type: Boolean, default: true},
-  iconClass: {type: String, default: "size-5"}
+const props = withDefaults(defineProps<{
+  icon: string;
+  textStart?: boolean;
+  iconClass?: HTMLAttributes['class'];
+}>(), {
+  textStart: false,
 })
 </script>
 
 <!-- TODO: skeleton for loading icons -->
 <template>
-  <Button class="text-xl flex justify-start">
+  <Button v-bind="$attrs" class="text-xl flex justify-start">
     <template v-if="props.textStart">
       <slot/>
     </template>

@@ -10,7 +10,6 @@ const props = defineProps<{
   defaultValue?: number
   options?: number[]
   mode?: 'set' | 'change',
-  min?: number,
   max?: number
 }>()
 
@@ -18,7 +17,8 @@ const rawModel = ref<number>(props.defaultValue ?? 0)
 const model = defineModel<number>();
 
 function UpdateModel(){
-  model.value = Clamp(rawModel.value, props.min, props.max)
+  rawModel.value = Clamp(rawModel.value, 0, props.max)
+  model.value = rawModel.value
 }
 onMounted(UpdateModel)
 watch(rawModel, UpdateModel)
@@ -27,7 +27,7 @@ watch(rawModel, UpdateModel)
 <template>
   <div class="flex-center justify-between gap-10 w-full py-5">
     <div class="flex-center flex-col w-40">
-      <input v-model="rawModel" type="number" class="text-7xl text-primary max-w-[11ch] text-center"/>
+      <input v-model="model" :min="0" type="number" class="text-7xl text-primary max-w-[11ch] text-center"/>
     </div>
   </div>
 
