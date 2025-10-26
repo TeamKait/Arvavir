@@ -2,7 +2,6 @@ import {defineStore} from 'pinia'
 import {ref} from "vue";
 import {AccountData} from "@/ts/AccountData/AccountData.ts";
 import {
-    IncomeSpendingCategory,
     NewIncomeSpending,
     Spending,
     SpendingCategories,
@@ -13,8 +12,8 @@ import {DialogComponent, useCommonDialog} from "@/stores/CommonDialog.ts";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
 import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
 
-const dialog = useCommonDialog();
 export const useAccountData = defineStore('account data', () => {
+    const dialog = useCommonDialog();
     const data = ref<AccountData>(new AccountData(0, [], [], 'dark'))
 
     async function NewSpending(defaultValues: number[] = [0, 0]) {
@@ -46,7 +45,7 @@ export const useAccountData = defineStore('account data', () => {
         data.value.spendings.push(newSpending)
     }
 
-    async function AddIncome(amount: number) {
+    async function AddIncome() {
         const newIncome = await NewIncome();
         if (!newIncome) return;
 
