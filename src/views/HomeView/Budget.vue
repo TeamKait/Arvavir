@@ -16,7 +16,7 @@ async function ChangeBudget() {
   const results = await dialog.DialogResults(
       'Изменить бюджет',
       new DialogComponent(ChangeBudgetDialog,
-          {defaultValue: 0, options: [-10000, -1000, 0, 1000, 10000], mode: 'change'}))
+          {defaultValue: data.data.budget, options: [-10000, -1000, 0, 1000, 10000], mode: 'change'}))
 
   if (!results) return;
 

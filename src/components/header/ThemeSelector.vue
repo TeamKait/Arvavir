@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import IconButton from "@/components/customUI/buttons/IconButton.vue";
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import {Card} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {Icon} from "@iconify/vue";
 import {useColorMode} from "@vueuse/core";
+import type {ColorTheme} from "@/ts/ColorTheme.ts";
+import {useAccountData} from "@/stores/AccountData.store.ts";
 
 const modes = {
   "light": "radix-icons:sun",
@@ -18,39 +20,38 @@ const russianModes = {
   'auto': 'авто'
 }
 
-// common button class
-const commonBC = 'size-6 transition-transform'
-
 // TODO: fetch from UserPrefs
-const selected = ref('auto');
+const data = useAccountData();
 const open = ref(false);
 
-function GetIcon(mode: string): string {
+function GetIcon(mode: ColorTheme): string {
   return modes[mode]
 }
 
-function GetTitle(mode: string): string {
+function GetTitle(mode: ColorTheme): string {
   return russianModes[mode]
+}
+
+function SetTheme(theme: ColorTheme) {
+  data.data.colorTheme = theme
+  mode.value = theme
 }
 
 const mode = useColorMode({
   disableTransition: false
 });
-watch(selected, () => {
-  mode.value = selected.value;
-})
 </script>
 
 <template>
   <div class="relative" v-click-outside="() => open = false">
     <!-- open menu button -->
     <Button @click="open = !open"
-            :icon="GetIcon(selected)"
+            :icon="GetIcon(data.data.colorTheme)"
             size="icon"
             class="size-13"
             variant="outline">
       <Icon
-          :icon="GetIcon(selected)"
+          :icon="GetIcon(data.data.colorTheme)"
           class="transition-transform duration-500 size-6"
           :class="{'rotate-360':open}"/>
     </Button>
@@ -59,9 +60,9 @@ watch(selected, () => {
     <transition name="menu">
       <Card v-if="open" class="absolute gap-3 p-4 -left-20 mt-2">
         <IconButton v-for="(icon, mode) in modes"
-                    @click="selected = mode"
+                    @click="() => SetTheme(mode)"
                     :icon="icon"
-                    :variant="selected == mode ? 'default' : 'outline'"
+                    :variant="data.data.colorTheme == mode ? 'default' : 'outline'"
                     class="flex justify-between">
           {{ GetTitle(mode) }}
         </IconButton>

@@ -1,16 +1,17 @@
 import type {Spending} from "@/ts/AccountData/SpendingCategoriesData.ts";
+import type {ColorTheme} from "@/ts/ColorTheme.ts";
+import {ref, type Ref} from "vue";
 
 export class AccountData {
     public budget: number;
     public spendings: Spending[];
     public incomes: Spending[];
-    // TODO: make it into type
-    public colorTheme: string;
+    public colorTheme: Ref<ColorTheme>;
 
-    public constructor(budget: number, spendings: Spending[], incomes: Spending[], colorTheme: string) {
+    public constructor(budget: number, spendings: Spending[], incomes: Spending[], colorTheme: ColorTheme = 'auto') {
         this.budget = budget;
         this.spendings = spendings;
         this.incomes = incomes;
-        this.colorTheme = colorTheme;
+        this.colorTheme = ref<ColorTheme>(colorTheme);
     }
 }
