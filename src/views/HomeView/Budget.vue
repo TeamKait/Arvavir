@@ -3,7 +3,7 @@ import {Card, CardContent} from "@/components/ui/card";
 import {Icon} from "@iconify/vue"
 import WithLabel from "@/utils/components/WithLabel.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
-import {ComponentWithProps, useCommonDialog} from "@/stores/CommonDialog.ts";
+import {DialogComponent, useCommonDialog} from "@/stores/CommonDialog.ts";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
 import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownFunctions.vue";
@@ -15,7 +15,7 @@ const dialog = useCommonDialog();
 async function ChangeBudget() {
   const results = await dialog.DialogResults(
       'Изменить бюджет',
-      new ComponentWithProps(ChangeBudgetDialog,
+      new DialogComponent(ChangeBudgetDialog,
           {defaultValue: 0, options: [-10000, -1000, 0, 1000, 10000], mode: 'change'}))
 
   if (!results) return;

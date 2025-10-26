@@ -8,8 +8,17 @@ import {
 } from "@/components/ui/select"
 import SpendingCategoryComponent from "@/components/dialogs/spending/SpendingCategoryComponent.vue";
 import {SpendingCategories} from "@/ts/AccountData/SpendingCategoriesData.ts";
+import {onMounted} from "vue";
 
-const selected = defineModel({default: 0});
+const props = defineProps({
+  defaultValue: {type: Number, required: false},
+})
+
+const selected = defineModel<number>({default: 0});
+
+onMounted(() => {
+  selected.value = props.defaultValue ?? 0
+})
 </script>
 
 <template>

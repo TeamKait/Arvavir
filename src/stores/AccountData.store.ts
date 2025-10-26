@@ -9,7 +9,7 @@ import {
     IsSpending
 } from "@/ts/AccountData/SpendingCategoriesData.ts";
 import {toast} from "vue-sonner";
-import {ComponentWithProps, useCommonDialog} from "@/stores/CommonDialog.ts";
+import {DialogComponent, useCommonDialog} from "@/stores/CommonDialog.ts";
 import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
 import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
 
@@ -17,21 +17,22 @@ const dialog = useCommonDialog();
 export const useAccountData = defineStore('account data', () => {
     const data = ref<AccountData>(new AccountData(0, [], [], 'dark'))
 
-    async function NewSpending(defaultValue:number = 0) {
+    async function NewSpending(defaultValues: number[] = [0, 0]) {
         const results = await dialog.DialogResults('Новая трата',
-            new ComponentWithProps(ChangeBudgetDialog,
-                {defaultValue: defaultValue, options: [-500, -200, -100, 0, 100, 200, 500], mode: 'change'}),
-            new ComponentWithProps(SpendingSelect))
+            new DialogComponent(ChangeBudgetDialog,
+                {defaultValue: defaultValues[0], options: [-500, -100, -50, 0, 50, 100, 500], mode: 'change'}),
+            new DialogComponent(SpendingSelect,
+                {defaultValue: defaultValues[1]}))
 
         if (!results) return;
 
         return new Spending(results[0], new Date(Date.now()), SpendingCategories[results[1]])
     }
 
-    async function NewIncome(defaultValue:number = 0){
+    async function NewIncome(defaultValue: number = 0) {
         const results = await dialog.DialogResults('Новое зачисление',
-            new ComponentWithProps(ChangeBudgetDialog,
-                {defaultValue: defaultValue, options: [-500, -100, 0, 100, 500], mode: 'change'}))
+            new DialogComponent(ChangeBudgetDialog,
+                {defaultValue: defaultValue, options: [-1000, -100, 0, 100, 1000], mode: 'change'}))
 
         if (!results) return;
 
@@ -62,7 +63,14 @@ export const useAccountData = defineStore('account data', () => {
         const item = data.value.spendings[index];
         const isSpending = IsSpending(item)
 
-        const newItem = isSpending ? await NewSpending(item.amount) : await NewIncome(item.amount);
+        let newItem;
+        if (isSpending) {
+            const catName = (item as Spending).category?.name;
+            const categoryIndex = catName ? SpendingCategories.findIndex(x => x.name === catName) : 0;
+            newItem = await NewSpending([item.amount, categoryIndex < 0 ? 0 : categoryIndex]);
+        } else {
+            newItem = await NewIncome(item.amount);
+        }
         if (!newItem) return;
 
         data.value.spendings[index] = newItem

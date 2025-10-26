@@ -2,7 +2,7 @@ import {ref, type Component, reactive} from 'vue'
 import {defineStore} from 'pinia'
 import TextDialog from "@/components/dialogs/TextDialog.vue";
 
-export class ComponentWithProps {
+export class DialogComponent {
     public component: Component
     public props: object | null
 
@@ -13,7 +13,8 @@ export class ComponentWithProps {
 }
 
 export const useCommonDialog = defineStore('common dialog', () => {
-    const components = ref<Array<ComponentWithProps>>([])
+    const components = ref<Array<DialogComponent>>([])
+    const conditions = ref<Array<boolean>>([])
     const results = ref<Array<any>>([])
     const config = reactive({
         label: "NO LABEL PROVIDED",
@@ -26,9 +27,10 @@ export const useCommonDialog = defineStore('common dialog', () => {
 
     let resolver: ((value: any) => void) | null = null;
 
-    async function InnerHandleDialog(dialogLabel:string, cancelText:string, confirmText:string, ...dialogComponents: ComponentWithProps[]) {
+    async function InnerHandleDialog(dialogLabel:string, cancelText:string, confirmText:string, ...dialogComponents: DialogComponent[]) {
         components.value = dialogComponents;
         results.value = Array(dialogComponents.length);
+        conditions.value = Array(dialogComponents.length);
         config.label = dialogLabel;
         config.buttons = {
             cancel: cancelText,
@@ -43,12 +45,12 @@ export const useCommonDialog = defineStore('common dialog', () => {
         return res as Array<any>;
     }
 
-    async function DialogResults(dialogLabel: string, ...dialogComponents: ComponentWithProps[]) {
+    async function DialogResults(dialogLabel: string, ...dialogComponents: DialogComponent[]) {
         return await InnerHandleDialog(dialogLabel, 'Отмена', 'Подтвердить', ...dialogComponents)
     }
 
     async function BoolDialogResults(dialogLabel: string, text: string, textClass: string = ""): Promise<boolean> {
-        const r = await InnerHandleDialog(dialogLabel, 'Нет', 'Да', new ComponentWithProps(TextDialog, {text: text, class: textClass}))
+        const r = await InnerHandleDialog(dialogLabel, 'Нет', 'Да', new DialogComponent(TextDialog, {text: text, class: textClass}))
         return !!r
     }
 
@@ -68,5 +70,5 @@ export const useCommonDialog = defineStore('common dialog', () => {
         ResolveDialog(null);
     }
 
-    return {components, results, config, open, DialogResults, BoolDialogResults, Confirm, Cancel}
+    return {components, results, conditions, config, open, DialogResults, BoolDialogResults, Confirm, Cancel}
 })

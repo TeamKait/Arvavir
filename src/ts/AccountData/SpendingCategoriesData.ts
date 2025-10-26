@@ -34,7 +34,7 @@ export function NewIncomeSpending(amount: number){
 
 export const SpendingCategories: SpendingCategory[] = [
     new SpendingCategory("Без категории", "#4a4a4a", "radix-icons:slash"),
-    new SpendingCategory("Еда", "#ff2e8c", "lucide:lollipop"),
+    new SpendingCategory("Продукты", "#ff2e8c", "lucide:lollipop"),
     new SpendingCategory("Развлечения", "#d5ba10", "radix-icons:accessibility"),
     new SpendingCategory("Техника", "#1f70ff", "radix-icons:gear"),
     new SpendingCategory("Здоровье", "#ff2e2e", "lucide:cross"),
