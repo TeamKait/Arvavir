@@ -5,13 +5,11 @@ import {ref, type Ref} from "vue";
 export class AccountData {
     public budget: number;
     public spendings: Spending[];
-    public incomes: Spending[];
     public colorTheme: Ref<ColorTheme>;
 
-    public constructor(budget: number, spendings: Spending[], incomes: Spending[], colorTheme: ColorTheme = 'auto') {
+    public constructor(budget: number, spendings: Spending[], colorTheme: ColorTheme = 'auto') {
         this.budget = budget;
         this.spendings = spendings;
-        this.incomes = incomes;
         this.colorTheme = ref<ColorTheme>(colorTheme);
     }
 }

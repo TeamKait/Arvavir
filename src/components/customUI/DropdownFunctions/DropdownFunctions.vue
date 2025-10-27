@@ -2,7 +2,7 @@
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
 import {DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 
-import {Icon} from "@iconify/vue";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const props = defineProps({
   functions: Array<DropdownFunction>
@@ -17,7 +17,7 @@ const props = defineProps({
 
   <DropdownMenuContent>
     <DropdownMenuItem v-for="f in functions" @click="() => f.func()">
-      <Icon v-if="f.icon" :icon="f.icon"/>
+      <SafeIcon v-if="f.icon" :icon="f.icon"/>
       <p>{{ f.text }}</p>
     </DropdownMenuItem>
   </DropdownMenuContent>

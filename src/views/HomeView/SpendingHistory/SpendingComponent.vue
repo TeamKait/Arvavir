@@ -2,10 +2,10 @@
 import {Spending, IsSpending} from "@/ts/AccountData/SpendingCategoriesData.ts";
 import SpendingCategoryComponent from "@/components/dialogs/spending/SpendingCategoryComponent.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
-import {Icon} from "@iconify/vue"
 import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownFunctions.vue";
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
 import {NotImplemented} from "@/ts/utils.ts";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const props = defineProps({
   spending: Spending
@@ -22,7 +22,7 @@ const functions = [new DropdownFunction('Скопировать', 'radix-icons:c
 
 <template>
   <div class="flex items-center justify-between border-2 p-2 rounded-xl hover:bg-secondary/20 group">
-    <div class="flex items-start">
+    <div class="flex-center">
       <div class="w-40 border-r-2">
         <SpendingCategoryComponent :category="spending?.category" class="whitespace-nowrap"/>
       </div>
@@ -33,7 +33,7 @@ const functions = [new DropdownFunction('Скопировать', 'radix-icons:c
     <DropdownFunctions
         :functions="functions">
       <CircleButton class="size-7 opacity-0 group-hover:opacity-100">
-        <Icon icon="radix-icons:dots-vertical"/>
+        <SafeIcon icon="radix-icons:dots-vertical"/>
       </CircleButton>
     </DropdownFunctions>
   </div>

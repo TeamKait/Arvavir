@@ -39,9 +39,10 @@ const total = computed(() => data.data.spendings.reduce((acc, curr) => acc += cu
     <CardContent>
       <div class="relative flex-center">
         <div class="size-70">
-          <DonutChart v-if="notEmpty" :data="chartData"/>
+          <DonutChart v-if="notEmpty" :data="chartData" class="size-70 absolute inset-0 z-0"/>
         </div>
-        <p class="absolute" :class="{'money text-3xl':notEmpty, 'text-muted-foreground':!notEmpty}">
+        <!-- spent money -->
+        <p class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" :class="{'money text-3xl':notEmpty, 'text-muted-foreground':!notEmpty}">
           {{ notEmpty ? total : 'Пока пусто...' }}</p>
       </div>
     </CardContent>

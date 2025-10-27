@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Input} from "@/components/ui/input";
-import {Icon} from "@iconify/vue";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const props = defineProps({
   icon: {type: String, required: true},
@@ -15,7 +15,7 @@ const model = defineModel<any>();
   <div class="relative w-full max-w-sm items-center">
     <Input v-model="model" :type="type" :placeholder="placeholder" class="pl-10" />
     <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
-      <Icon :icon="icon" class="size-6 text-muted-foreground" />
+      <SafeIcon :icon="icon" class="size-6 text-muted-foreground" />
     </span>
   </div>
 </template>

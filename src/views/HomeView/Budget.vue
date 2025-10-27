@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {Card, CardContent} from "@/components/ui/card";
-import {Icon} from "@iconify/vue"
 import WithLabel from "@/utils/components/WithLabel.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
 import {DialogComponent, useCommonDialog} from "@/stores/CommonDialog.ts";
@@ -8,6 +7,7 @@ import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
 import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownFunctions.vue";
 import {useAccountData} from "@/stores/AccountData.store.ts";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const data = useAccountData();
 const dialog = useCommonDialog();
@@ -44,7 +44,7 @@ async function ChangeBudget() {
           <CircleButton
               @click="data.AddIncome"
               class="size-18">
-            <Icon icon="radix-icons:double-arrow-up" class="size-7"/>
+            <SafeIcon icon="radix-icons:double-arrow-up" class="size-7"/>
           </CircleButton>
         </WithLabel>
 
@@ -53,7 +53,7 @@ async function ChangeBudget() {
           <CircleButton
               @click="data.AddSpending"
               class="size-18">
-            <Icon icon="radix-icons:double-arrow-down" class="size-7"/>
+            <SafeIcon icon="radix-icons:double-arrow-down" class="size-7"/>
           </CircleButton>
         </WithLabel>
 
@@ -62,7 +62,7 @@ async function ChangeBudget() {
           <DropdownFunctions
               :functions="[new DropdownFunction('Изменить бюджет', 'radix-icons:pencil-1', ChangeBudget)]">
             <CircleButton class="size-18">
-              <Icon icon="radix-icons:dots-vertical" class="size-7"/>
+              <SafeIcon icon="radix-icons:dots-vertical" class="size-7"/>
             </CircleButton>
           </DropdownFunctions>
         </WithLabel>

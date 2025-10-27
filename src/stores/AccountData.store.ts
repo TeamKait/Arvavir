@@ -14,7 +14,7 @@ import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
 
 export const useAccountData = defineStore('account data', () => {
     const dialog = useCommonDialog();
-    const data = ref<AccountData>(new AccountData(0, [], [], 'dark'))
+    const data = ref<AccountData>(new AccountData(0, [], 'auto'))
 
     async function NewSpending(defaultValues: number[] = [0, 0]) {
         const results = await dialog.DialogResults('Новая трата',

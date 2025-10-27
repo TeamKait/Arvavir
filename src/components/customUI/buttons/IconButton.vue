@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Button} from "@/components/ui/button";
-import {Icon} from "@iconify/vue";
 import type {HTMLAttributes} from "vue";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const props = withDefaults(defineProps<{
   icon: string;
@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<{
       <slot/>
     </template>
 
-    <Icon :icon="props.icon" :class="props.iconClass"/>
+    <SafeIcon :icon="props.icon" :class="props.iconClass"/>
 
     <template v-if="!props.textStart">
       <slot/>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ref} from 'vue'
-import {Icon} from "@iconify/vue"
 import {Avatar, AvatarFallback} from "@/components/ui/avatar"
 import {getAuth, onAuthStateChanged, type User} from "firebase/auth"
 import IconButton from "@/components/customUI/buttons/IconButton.vue";
@@ -9,6 +8,7 @@ import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownF
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
 import {toast} from "vue-sonner";
 import {useCommonDialog} from "@/stores/CommonDialog.ts";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const auth = getAuth()
 const dialog = useCommonDialog();
@@ -33,7 +33,7 @@ async function handleLogOut() {
   <RouterLink to="/login" class="flex items-center px-10 gap-3 hover:underline border-l h-full">
     <Avatar class="size-15">
       <AvatarFallback class="text-3xl">
-        <Icon icon="radix-icons:person"/>
+        <SafeIcon icon="radix-icons:person"/>
       </AvatarFallback>
     </Avatar>
     <!-- TODO: burger menu for log out etc -->

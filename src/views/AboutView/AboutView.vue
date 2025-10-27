@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Author from "@/views/AboutView/Author.vue";
 import {ref} from "vue";
-import {Icon} from "@iconify/vue";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const selected = ref([false, false, false])
 </script>
@@ -41,7 +41,7 @@ const selected = ref([false, false, false])
     </div>
 
     <a class="flex-center gap-2 text-2xl hover:underline" href="https://github.com/TeamKait/Arvavir" target="_blank">
-      <Icon icon="radix-icons:github-logo"/>
+      <SafeIcon icon="radix-icons:github-logo"/>
       Репозиторий проекта
     </a>
   </div>

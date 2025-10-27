@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Icon} from "@iconify/vue"
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import {Icon} from "@iconify/vue"
 
     <div class="flex-center text-4xl gap-2">
       <p>Страница не найдена</p>
-      <Icon icon="radix-icons:crumpled-paper"/>
+      <SafeIcon icon="radix-icons:crumpled-paper"/>
     </div>
   </div>
 </template>

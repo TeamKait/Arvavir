@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {Icon} from "@iconify/vue"
 import IconButton from "@/components/customUI/buttons/IconButton.vue";
 import {User} from "@/ts/firebase/users/user.model.ts";
 import {Skeleton} from "@/components/ui/skeleton";
 import {computed} from "vue";
 import {CopyToClipboard} from "@/ts/utils.ts";
+import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
 const props = defineProps<{
   user?: User | null;
@@ -30,7 +30,7 @@ const date = computed(() => {
     <template v-else>
       <div class="flex items-center gap-3 pr-28">
         <div class="p-3 text-3xl bg-secondary rounded-full border-2 flex-shrink-0">
-          <Icon icon="radix-icons:person"/>
+          <SafeIcon icon="radix-icons:person"/>
         </div>
 
         <div class="flex flex-col min-w-0">
