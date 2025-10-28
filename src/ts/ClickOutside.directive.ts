@@ -1,4 +1,4 @@
-// @/utils/directives/ClickOutside.ts
+// @/utils/directives/ClickOutside.directive.ts
 import type { DirectiveBinding } from 'vue'
 
 interface ClickOutsideElement extends HTMLElement {

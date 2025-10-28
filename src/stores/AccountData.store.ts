@@ -14,7 +14,7 @@ import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
 
 export const useAccountData = defineStore('account data', () => {
     const dialog = useCommonDialog();
-    const data = ref<AccountData>(new AccountData(0, [], 'auto'))
+    const data = ref<AccountData>(new AccountData())
 
     async function NewSpending(defaultValues: number[] = [0, 0]) {
         const results = await dialog.DialogResults('Новая трата',
@@ -75,10 +75,22 @@ export const useAccountData = defineStore('account data', () => {
         data.value.spendings[index] = newItem
     }
 
+    async function ChangeBudget() {
+        const results = await dialog.DialogResults(
+            'Изменить бюджет',
+            new DialogComponent(ChangeBudgetDialog,
+                {defaultValue: data.value.budget, options: [-10000, -1000, 0, 1000, 10000], mode: 'change'}))
+
+        if (!results) return;
+
+        SetBudget(results[0])
+    }
+
     function SetBudget(amount: number) {
         data.value.budget = amount;
         toast.info("Баланс изменен")
     }
 
-    return {data, NewSpending, NewIncome, AddSpending, AddIncome, DeleteSpending, EditSpending, SetBudget}
+
+    return {data, NewSpending, NewIncome, AddSpending, AddIncome, DeleteSpending, EditSpending, ChangeBudget, SetBudget}
 })

@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { ClickOutside } from './utils/directives/ClickOutside'
+import { ClickOutside } from './ts/ClickOutside.directive.ts'
 
 import App from './App.vue'
 import router from './router.ts'
