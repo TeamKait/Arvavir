@@ -23,21 +23,21 @@ const router = createRouter({
             name: 'О проекте',
             component: () => import('@/views/AboutView/AboutView.vue')
         },
+        // {
+        //     path: '/settings',
+        //     name: 'Настройки',
+        //     component: () => import('@/views/SettingsView.vue')
+        // },
         {
-            path: '/settings',
-            name: 'Настройки',
-            component: () => import('@/views/SettingsView.vue')
-        },
-        {
-            path: '/admin',
-            name: 'Админ Панель',
+            path: '/users',
+            name: 'Пользователи',
             component: () => import('@/views/AdminView/AdminPanel.vue')
         },
 
         // 404 page
         {
             path: '/:pathMatch(.*)*',
-            name: 'NotFound',
+            name: '404',
             component: () => import('@/views/Page404.vue')
         }
     ],
