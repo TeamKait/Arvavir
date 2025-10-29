@@ -12,7 +12,7 @@ import Footer from "@/components/footer/Footer.vue";
     <div class="flex-1 flex-center mt-5">
       <RouterView/>
     </div>
-    <Footer class="mt-20 mb-0"/>
+    <Footer class="mt-5 mb-0"/>
   </div>
 
   <!-- диалог на весь экран -->

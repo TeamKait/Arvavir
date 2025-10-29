@@ -54,15 +54,26 @@ const spendingsSum = computed(() => {
     .reduce((acc, s) => acc + Math.abs(s.amount), 0);
 });
 
-// Total left budget for the whole account (budget - period spendings)
+// Sum of incomes within the current period
+const incomesSum = computed(() => {
+  const from = periodStart.value.getTime();
+  return data.data.spendings
+    .filter(s => !IsSpending(s) && new Date(s.date).getTime() >= from)
+    .reduce((acc, s) => acc + s.amount, 0);
+});
+
+// Effective budget for calculations: base budget + incomes (do not persist to store)
+const effectiveBudget = computed(() => data.data.budget + incomesSum.value);
+
+// Total left budget for the whole account (effective budget - period spendings)
 // KEEP: left budget value for later use (do not persist to store)
-const leftBudget = computed(() => data.data.budget - spendingsSum.value);
+const leftBudget = computed(() => effectiveBudget.value - spendingsSum.value);
 
 // Today's budget to display, depends on spending mode
 const todayBudget = computed(() => {
   return Math.round(
     data.data.spendingMode === 'period'
-      ? (data.data.budget / devisor.value) - spendingsSum.value
+      ? (effectiveBudget.value / devisor.value) - spendingsSum.value
       : leftBudget.value / devisor.value
   );
 });
@@ -75,7 +86,7 @@ const todayBudget = computed(() => {
         <!-- today budget -->
         <h1 class="text-xl text-muted-foreground">На {{ data.data.periodType == 'day' ? 'сегодня' : 'неделю' }}</h1>
         <!-- TODO: store devisor in account data -->
-        <h1 class="text-7xl text-primary money">{{ todayBudget }}</h1>
+        <h1 class="text-7xl money text-primary" :class="{'!text-destructive':todayBudget <= 0}">{{ todayBudget }}</h1>
 
         <!-- budget -->
         <!-- TODO: refactor it to LEFT_BUDGET/BUDGET -->
