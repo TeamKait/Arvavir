@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Author from "@/views/AboutView/Author.vue";
 import {ref} from "vue";
-import SafeIcon from "@/components/customUI/SafeIcon.vue";
 import Paragraph from "@/views/AboutView/Paragraph.vue";
 import NumberedList from "@/components/customUI/NumberedList.vue";
 
@@ -51,10 +50,5 @@ const selected = ref([false, false, false])
     <Paragraph label="Стек">
       <NumberedList :items="['Vue.js', 'TailwindCSS', 'Pinia', 'TypeScript', 'Shadcn-Vue', 'Iconify', 'Chart.js', 'Firestore']"/>
     </Paragraph>
-
-    <a class="flex-center gap-2 text-2xl hover:underline" href="https://github.com/TeamKait/Arvavir" target="_blank">
-      <SafeIcon icon="radix-icons:github-logo"/>
-      Репозиторий проекта
-    </a>
   </div>
 </template>
