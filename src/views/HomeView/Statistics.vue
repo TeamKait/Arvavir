@@ -3,6 +3,7 @@ import DonutChart from "@/components/customUI/DonutChart/DonutChart.vue";
 import {useAccountData} from "@/stores/AccountData.store.ts";
 import {computed} from "vue";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {IsSpending} from "@/ts/AccountData/SpendingCategoriesData.ts";
 
 const data = useAccountData();
 
@@ -26,7 +27,8 @@ const chartData = computed(() => {
 });
 
 const notEmpty = computed(() => chartData.value.length > 0)
-const total = computed(() => data.data.spendings.reduce((acc, curr) => acc += curr.amount, 0))
+const totalSpendings = computed(() => data.data.spendings.filter(item => IsSpending({category: item.category})).reduce((acc, curr) => acc += curr.amount, 0))
+const totalIncomes = computed(() => data.data.spendings.filter(item => !IsSpending({category: item.category})).reduce((acc, curr) => acc += curr.amount, 0))
 </script>
 
 <template>
@@ -42,8 +44,11 @@ const total = computed(() => data.data.spendings.reduce((acc, curr) => acc += cu
           <DonutChart v-if="notEmpty" :data="chartData" class="size-70 absolute inset-0 z-0"/>
         </div>
         <!-- spent money -->
-        <p class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" :class="{'money text-3xl':notEmpty, 'text-muted-foreground':!notEmpty}">
-          {{ notEmpty ? total : 'Пока пусто...' }}</p>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-center flex-col">
+          <p :class="{'money text-3xl':notEmpty, 'text-muted-foreground':!notEmpty}">
+            {{ notEmpty ? totalSpendings : 'Пока пусто...' }}</p>
+          <p v-if="totalIncomes > 0" class="money text-3xl income">{{ totalIncomes }}</p>
+        </div>
       </div>
     </CardContent>
   </Card>

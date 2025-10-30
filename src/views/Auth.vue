@@ -63,6 +63,8 @@ function GeneratePassword(){
 
   passwordInput.value = password
   repeatPasswordInput.value = password
+
+  passwordVisible.value = true;
 }
 </script>
 
