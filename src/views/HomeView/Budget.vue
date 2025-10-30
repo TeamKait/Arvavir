@@ -9,7 +9,7 @@ import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownF
 import {useAccountData} from "@/stores/AccountData.store.ts";
 import SafeIcon from "@/components/customUI/SafeIcon.vue";
 import PillSelect from "@/components/customUI/PillSelect.vue";
-import {PERIOD_LABELS, type PeriodType, SPENDING_MODE_LABELS, type SpendingMode} from "@/ts/AccountData/AccountData.ts";
+import {PERIOD_LABELS, type PeriodType, SPENDING_MODE_LABELS, type SpendingMode} from "@/ts/firebase/AccountData/AccountData.ts";
 import {computed} from "vue";
 import {IsSpending} from "@/ts/AccountData/SpendingCategoriesData.ts";
 

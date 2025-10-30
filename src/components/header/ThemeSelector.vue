@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconButton from "@/components/customUI/buttons/IconButton.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import {Card} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {useColorMode} from "@vueuse/core";
@@ -40,6 +40,11 @@ function SetTheme(theme: ColorTheme) {
 const mode = useColorMode({
   disableTransition: false
 });
+
+// Keep theme in sync with store changes (login/logout/refresh)
+watch(() => data.data.colorTheme, (val) => {
+  mode.value = val
+}, { immediate: true })
 </script>
 
 <template>

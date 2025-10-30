@@ -41,4 +41,4 @@ export const SpendingCategories: SpendingCategory[] = [
     new SpendingCategory("Необходимое", "#c42eff", "radix-icons:cube")
 ]
 
-export const IncomeSpendingCategory = new SpendingCategory("Зачисление", "#00c680", "lucide:dollar-sign")
+export const IncomeSpendingCategory = new SpendingCategory("Зачисление", "#00c680", "lucide:russian-ruble")
