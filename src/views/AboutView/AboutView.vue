@@ -42,10 +42,10 @@ const selected = ref([false, false, false])
     </div>
 
     <Paragraph label="О проекте">
-      ARVAVIR - простой финансовый трекер для контроля над финансами
+      ARVAVIR - простой финансовый трекер для контроля над денежными ресурсами
     </Paragraph>
     <Paragraph label="Наша цель">
-      Создать легкре и интуитивно понятное web-приложение, чтобы помочь эффективнее управлять деньгами
+      Создать легкое и интуитивно понятное web-приложение, чтобы помочь эффективнее управлять деньгами
     </Paragraph>
     <Paragraph label="Стек">
       <NumberedList :items="['Vue.js', 'TailwindCSS', 'Pinia', 'TypeScript', 'Shadcn-Vue', 'Iconify', 'Chart.js', 'Firestore']"/>
