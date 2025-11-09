@@ -4,10 +4,9 @@ import IconButton from "@/components/customUI/buttons/IconButton.vue";
 import UserComponent from "@/views/AdminView/UserComponent.vue";
 import {computed, ref} from "vue";
 import type {User} from "@/ts/firebase/users/user.model.ts";
-import {LoadingAction} from "@/ts/TryAction.ts";
+import {TryLoadingAction} from "@/ts/TryAction.ts";
 import {getUsers} from "@/ts/firebase/users/user.controller.ts";
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {Input} from "@/components/ui/input";
 import InputWithIcon from "@/components/customUI/InputWithIcon.vue";
 
 const users = ref<User[]>([]);
@@ -15,7 +14,7 @@ const loading = ref(true);
 
 
 async function Reload() {
-  users.value = await LoadingAction(getUsers, loading)
+  users.value = await TryLoadingAction(getUsers, loading)
   ToggleAll(false)
 }
 Reload()
@@ -91,7 +90,7 @@ const filteredUsers = computed(() => {
 
           <!-- skeletons -->
           <UserComponent v-else
-                         v-for="(_, i) in 4"
+                         v-for="_ in 4"
                          :loaded="false"
                          :user="null"
                          :open="false"/>
