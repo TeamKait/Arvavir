@@ -11,9 +11,13 @@ export async function TryAction(action: Function) {
     }
 }
 
-export async function LoadingAction(action: Function, loadingRef:Ref<boolean>) {
+export async function LoadingAction(action: Function, loadingRef:Ref<boolean>){
     loadingRef.value = true;
-    const response = await TryAction(action);
+    const response = await action();
     loadingRef.value = false;
     return response
+}
+
+export async function TryLoadingAction(action: Function, loadingRef:Ref<boolean>) {
+    return await LoadingAction(() => TryAction(action), loadingRef)
 }

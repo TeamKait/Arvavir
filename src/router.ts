@@ -28,11 +28,11 @@ const router = createRouter({
         //     name: 'Настройки',
         //     component: () => import('@/views/SettingsView.vue')
         // },
-        {
-            path: '/users',
-            name: 'Пользователи',
-            component: () => import('@/views/AdminView/AdminPanel.vue')
-        },
+        // {
+        //     path: '/users',
+        //     name: 'Пользователи',
+        //     component: () => import('@/views/AdminView/AdminPanel.vue')
+        // },
 
         // 404 page
         {
