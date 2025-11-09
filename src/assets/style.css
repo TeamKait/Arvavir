@@ -109,7 +109,7 @@ body::-webkit-scrollbar {
 }
 
 .money::after {
-    content: "₽";
+    content: "\20BD"; /* ₽ */
     width: 0;
     display: inline-block;
 }
