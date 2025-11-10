@@ -4,6 +4,7 @@ import {useAccountData} from "@/stores/AccountData.store.ts";
 import {computed} from "vue";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {IsSpending} from "@/ts/AccountData/SpendingCategoriesData.ts";
+import {Skeleton} from "@/components/ui/skeleton";
 
 const data = useAccountData();
 
@@ -39,7 +40,8 @@ const totalIncomes = computed(() => data.data.spendings.filter(item => !IsSpendi
 
     <!-- TODO: absolute position for chart and -z-100 -->
     <CardContent>
-      <div class="relative flex-center">
+      <Skeleton v-if="!data.loaded" class="w-70 h-90 rounded-xl"/>
+      <div v-else class="relative flex-center">
         <div class="size-70">
           <DonutChart v-if="notEmpty" :data="chartData" class="size-70 absolute inset-0 z-0"/>
         </div>

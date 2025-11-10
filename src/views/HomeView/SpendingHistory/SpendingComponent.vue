@@ -4,18 +4,27 @@ import SpendingCategoryComponent from "@/components/dialogs/spending/SpendingCat
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
 import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownFunctions.vue";
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
-import {NotImplemented} from "@/ts/utils.ts";
+import {CopyToClipboard, FormatDate} from "@/ts/utils.ts";
 import SafeIcon from "@/components/customUI/SafeIcon.vue";
+import {computed} from "vue";
 
 const props = defineProps({
   spending: Spending
 })
 
 const emit = defineEmits(['delete', 'edit'])
+const copyText = computed(() => {
+  const isSpending = IsSpending(props.spending!)
+  let commonText = `${isSpending ? 'Трата' : 'Зачисление'} за ${FormatDate(props.spending?.date!)}\nСумма: ${props.spending?.amount}₽`
+  if(isSpending){
+    commonText += `\nКатегория: ${props.spending?.category.name}`
+  }
+  return commonText
+})
 
 const imSpending = IsSpending(props.spending!)
 
-const functions = [new DropdownFunction('Скопировать', 'radix-icons:copy', NotImplemented),
+const functions = [new DropdownFunction('Скопировать', 'radix-icons:copy', () => CopyToClipboard(copyText.value)),
   new DropdownFunction('Редактировать', 'radix-icons:pencil-1', () => emit('edit')),
   new DropdownFunction('Удалить', 'radix-icons:trash', () => emit('delete'))]
 </script>

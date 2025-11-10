@@ -2,8 +2,7 @@
 import {Card, CardContent} from "@/components/ui/card";
 import WithLabel from "@/components/customUI/WithLabel.vue";
 import CircleButton from "@/components/customUI/buttons/CircleButton.vue";
-import {DialogComponent, useCommonDialog} from "@/stores/CommonDialog.ts";
-import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
+import {useCommonDialog} from "@/stores/CommonDialog.ts";
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
 import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownFunctions.vue";
 import {useAccountData} from "@/stores/AccountData.store.ts";
@@ -12,6 +11,7 @@ import PillSelect from "@/components/customUI/PillSelect.vue";
 import {PERIOD_LABELS, type PeriodType, SPENDING_MODE_LABELS, type SpendingMode} from "@/ts/firebase/AccountData/AccountData.ts";
 import {computed} from "vue";
 import {IsSpending} from "@/ts/AccountData/SpendingCategoriesData.ts";
+import {Spinner} from "@/components/ui/spinner";
 
 const data = useAccountData();
 const dialog = useCommonDialog();
@@ -82,7 +82,10 @@ const todayBudget = computed(() => {
 <template>
   <Card>
     <CardContent class="flex-center flex-col gap-5">
-      <div class="flex-center flex-col">
+      <div v-if="!data.loaded" class="flex-center w-full h-40">
+        <Spinner class="size-15 text-primary"/>
+      </div>
+      <div v-else class="flex-center flex-col h-40">
         <!-- today budget -->
         <h1 class="text-xl text-muted-foreground">На {{ data.data.periodType == 'day' ? 'сегодня' : 'неделю' }}</h1>
         <!-- TODO: store devisor in account data -->

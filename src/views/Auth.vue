@@ -16,12 +16,14 @@ import {NotEmpty, ValidEmail} from "@/components/customUI/InputWithCondition/Inp
 import { FirebaseError } from "firebase/app";
 import {setPersistence, inMemoryPersistence, browserLocalPersistence} from "firebase/auth";
 import WithLabel from "@/components/customUI/WithLabel.vue";
+import {useAccountData} from "@/stores/AccountData.store.ts";
 
 const props = defineProps({
   login: Boolean
 })
 
 const router = useRouter();
+const data = useAccountData();
 
 // card label
 const label = computed(() => props.login ? 'Войти' : 'Регистрация')
@@ -55,9 +57,11 @@ async function HandleButton() {
       await Register()
     }
 
+    data.loaded = false;
     await router.push("/")
   } catch (err) {
     handleFirebaseError(err);
+    data.loaded = true;
   } finally {
     loading.value = false
     passwordInput.value = ""

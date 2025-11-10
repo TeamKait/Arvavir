@@ -1,7 +1,7 @@
 import {toast} from "vue-sonner";
 
 export function CopyToClipboard(text: string) {
-    navigator.clipboard.writeText(text).then(r => toast.success("Скопировано"));
+    navigator.clipboard.writeText(text).then(() => toast.success("Скопировано"));
 }
 
 export function Clamp(value: number, min: number | undefined, max: number | undefined) {
@@ -14,4 +14,8 @@ export function Clamp(value: number, min: number | undefined, max: number | unde
 export function NotImplemented(){
     toast.warning("NOT IMPLEMENTED")
     console.error("NOT IMPLEMENTED")
+}
+
+export function FormatDate(date: Date) {
+    return new Intl.DateTimeFormat(undefined, {dateStyle: 'medium', timeStyle: 'short'}).format(date);
 }

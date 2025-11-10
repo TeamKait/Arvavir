@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import {Input} from "@/components/ui/input";
 import WithLabel from "@/components/customUI/WithLabel.vue";
-import {ref} from "vue";
+import {ref} from "@vue/runtime-dom";
 import type {ConditionWithError} from "@/components/customUI/InputWithCondition/InputConditions.ts";
 
 const props = defineProps({
-  placeholder: {type: String, required: false},
   min: {type: Number, required: false},
   max: {type: Number, required: false},
-  type: {type: String, required: false},
 
   conditions: {type: Array<ConditionWithError>, required: true},
   ignoreEmpty: {type: Boolean, default: false},
@@ -31,7 +29,7 @@ function CheckCondition() {
   }
 
   // valid if empty and ignore empty
-  if (props.ignoreEmpty && model.value?.toString().length == 0){
+  if (props.ignoreEmpty && model.value?.toString().length == 0) {
     ShowError("");
     return true;
   }
@@ -64,9 +62,8 @@ defineExpose({ShowError, CheckCondition, model});
     <Input
         @input="HandleInput"
         v-model="model"
-        :placeholder="placeholder"
-        :min="min"
-        :max="max"
-        :type="type"/>
+        v-bind="$attrs"
+        :min="props.min"
+        :max="props.max"/>
   </WithLabel>
 </template>

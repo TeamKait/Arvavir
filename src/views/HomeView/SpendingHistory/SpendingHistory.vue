@@ -3,6 +3,7 @@ import SpendingComponent from "@/views/HomeView/SpendingHistory/SpendingComponen
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {useAccountData} from "@/stores/AccountData.store.ts";
+import {Skeleton} from "@/components/ui/skeleton";
 
 const data = useAccountData();
 </script>
@@ -13,8 +14,9 @@ const data = useAccountData();
       <CardTitle>История</CardTitle>
     </CardHeader>
 
-    <CardContent>
-      <ScrollArea class="h-60 p-3">
+    <CardContent class="h-60 w-100">
+      <Skeleton v-if="!data.loaded" class="w-full h-90 rounded-xl"/>
+      <ScrollArea v-else class="h-90 p-3">
         <div class="flex flex-col gap-1 w-80">
           <SpendingComponent
               v-for="(s, i) in data.data.spendings"

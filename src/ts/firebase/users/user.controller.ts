@@ -113,6 +113,7 @@ export function initAuthSync() {
         } else {
             // reset store on logout
             store.Reset()
+            store.loaded = true;
         }
     })
 }

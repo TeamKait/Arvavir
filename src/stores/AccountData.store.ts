@@ -17,6 +17,7 @@ import {saveAccountData} from "@/ts/firebase/AccountData/AcountData.controller.t
 export const useAccountData = defineStore('account data', () => {
     const dialog = useCommonDialog();
     const data = ref<AccountData>(new AccountData())
+    const loaded = ref(false);
 
     // sync control
     let suppressSave = false
@@ -27,6 +28,7 @@ export const useAccountData = defineStore('account data', () => {
         data.value = newData
         // small next-tick delay before allowing saves again
         setTimeout(() => { suppressSave = false }, 0)
+        loaded.value = true
     }
 
     function Reset() {
@@ -126,5 +128,5 @@ export const useAccountData = defineStore('account data', () => {
     }
 
 
-    return {data, NewSpending, NewIncome, AddSpending, AddIncome, DeleteSpending, EditSpending, ChangeBudget, SetBudget, SetFromRemote, Reset}
+    return {data, loaded, NewSpending, NewIncome, AddSpending, AddIncome, DeleteSpending, EditSpending, ChangeBudget, SetBudget, SetFromRemote, Reset}
 })
