@@ -13,6 +13,13 @@ import ChangeBudgetDialog from "@/components/dialogs/ChangeBudgetDialog.vue";
 import SpendingSelect from "@/components/dialogs/spending/SpendingSelect.vue";
 import {auth} from "@/ts/firebase/firebase.ts";
 import {saveAccountData} from "@/ts/firebase/AccountData/AcountData.controller.ts";
+import {getAuth} from "firebase/auth";
+
+function noAccountWarning() {
+    if(!getAuth().currentUser){
+        toast.warning("Данные будут утеряны без аккаунта")
+    }
+}
 
 export const useAccountData = defineStore('account data', () => {
     const dialog = useCommonDialog();
@@ -59,6 +66,7 @@ export const useAccountData = defineStore('account data', () => {
             new DialogComponent(SpendingSelect,
                 {defaultValue: defaultValues[1]}))
 
+        noAccountWarning()
         if (!results) return;
 
         return new Spending(results[0], new Date(Date.now()), SpendingCategories[results[1]])
@@ -68,6 +76,8 @@ export const useAccountData = defineStore('account data', () => {
         const results = await dialog.DialogResults('Новое зачисление',
             new DialogComponent(ChangeBudgetDialog,
                 {defaultValue: defaultValue, options: [-1000, -100, 0, 100, 1000], mode: 'change'}))
+
+        noAccountWarning()
 
         if (!results) return;
 
@@ -117,6 +127,8 @@ export const useAccountData = defineStore('account data', () => {
             new DialogComponent(ChangeBudgetDialog,
                 {defaultValue: data.value.budget, options: [-10000, -1000, 0, 1000, 10000], mode: 'change'}))
 
+        noAccountWarning()
+
         if (!results) return;
 
         SetBudget(results[0])
@@ -124,7 +136,6 @@ export const useAccountData = defineStore('account data', () => {
 
     function SetBudget(amount: number) {
         data.value.budget = amount;
-        toast.info("Баланс изменен")
     }
 
 
