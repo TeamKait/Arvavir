@@ -6,7 +6,6 @@ import IconButton from "@/components/customUI/buttons/IconButton.vue";
 import {logOut} from "@/ts/firebase/users/user.controller.ts";
 import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownFunctions.vue";
 import {DropdownFunction} from "@/components/customUI/DropdownFunctions/DropdownFunction.ts";
-import {toast} from "vue-sonner";
 import {useCommonDialog} from "@/stores/CommonDialog.ts";
 import SafeIcon from "@/components/customUI/SafeIcon.vue";
 
@@ -40,8 +39,7 @@ async function handleLogOut() {
     <p class="text-2xl">{{ user?.email?.split('@')[0] ?? 'Войти' }}</p>
 
     <DropdownFunctions v-if="auth.currentUser"
-                       :functions="[new DropdownFunction('Настройки', 'radix-icons:gear', () => toast.warning('NOT IMPLEMENTED')),
-                                    new DropdownFunction('Выйти', 'radix-icons:exit', handleLogOut)]">
+                       :functions="[new DropdownFunction('Выйти', 'radix-icons:exit', handleLogOut)]">
       <IconButton
           icon="radix-icons:dots-vertical"
           size="icon"
