@@ -10,11 +10,13 @@ const router = createRouter({
         },
         {
             path: '/login',
+            name: 'Войти',
             component: () => import('@/views/Auth.vue'),
             props: {login: true}
         },
         {
             path: '/register',
+            name: 'Регистрация',
             component: () => import('@/views/Auth.vue'),
             props: {login: false}
         },
@@ -23,17 +25,6 @@ const router = createRouter({
             name: 'О проекте',
             component: () => import('@/views/AboutView/AboutView.vue')
         },
-        // {
-        //     path: '/settings',
-        //     name: 'Настройки',
-        //     component: () => import('@/views/SettingsView.vue')
-        // },
-        // {
-        //     path: '/users',
-        //     name: 'Пользователи',
-        //     component: () => import('@/views/AdminView/AdminPanel.vue')
-        // },
-
         // 404 page
         {
             path: '/:pathMatch(.*)*',
@@ -41,6 +32,15 @@ const router = createRouter({
             component: () => import('@/views/Page404.vue')
         }
     ],
+})
+
+router.beforeEach((to) => {
+    if(to.path == '/' || !to.name){
+        document.title = 'ARVAVIR'
+        return
+    }
+
+    document.title = `ARVAVIR | ${to.name.toString()}`
 })
 
 export default router

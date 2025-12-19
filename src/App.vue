@@ -3,7 +3,7 @@ import Header from "@/components/header/Header.vue";
 import CommonDialog from "@/components/CommonDialog.vue";
 import {Toaster} from '@/components/ui/sonner'
 import 'vue-sonner/style.css'
-import Footer from "@/components/footer/Footer.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
