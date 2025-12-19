@@ -93,7 +93,7 @@ const todayBudget = computed(() => {
 
         <!-- budget -->
         <!-- TODO: refactor it to LEFT_BUDGET/BUDGET -->
-        <h2 class="text-md money">Всего: {{ data.data.budget }}</h2>
+        <h2 class="text-md money"><span class="money mr-[1ch]">{{ leftBudget }}</span> / {{ data.data.budget }}</h2>
       </div>
 
       <div class="flex gap-2">
