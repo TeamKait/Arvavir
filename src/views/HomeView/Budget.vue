@@ -8,7 +8,12 @@ import DropdownFunctions from "@/components/customUI/DropdownFunctions/DropdownF
 import {useAccountData} from "@/stores/AccountData.store.ts";
 import SafeIcon from "@/components/customUI/SafeIcon.vue";
 import PillSelect from "@/components/customUI/PillSelect.vue";
-import {PERIOD_LABELS, type PeriodType, SPENDING_MODE_LABELS, type SpendingMode} from "@/ts/firebase/AccountData/AccountData.ts";
+import {
+  PERIOD_LABELS,
+  type PeriodType,
+  SPENDING_MODE_LABELS,
+  type SpendingMode
+} from "@/ts/firebase/AccountData/AccountData.ts";
 import {computed} from "vue";
 import {IsSpending} from "@/ts/AccountData/SpendingCategoriesData.ts";
 import {Spinner} from "@/components/ui/spinner";
@@ -50,17 +55,34 @@ const periodStart = computed(() => {
 const spendingsSum = computed(() => {
   const from = periodStart.value.getTime();
   return data.data.spendings
-    .filter(s => IsSpending(s) && new Date(s.date).getTime() >= from)
-    .reduce((acc, s) => acc + Math.abs(s.amount), 0);
+      .filter(s => IsSpending(s) && new Date(s.date).getTime() >= from)
+      .reduce((acc, s) => acc + Math.abs(s.amount), 0);
 });
 
 // Sum of incomes within the current period
 const incomesSum = computed(() => {
   const from = periodStart.value.getTime();
   return data.data.spendings
-    .filter(s => !IsSpending(s) && new Date(s.date).getTime() >= from)
-    .reduce((acc, s) => acc + s.amount, 0);
+      .filter(s => !IsSpending(s) && new Date(s.date).getTime() >= from)
+      .reduce((acc, s) => acc + s.amount, 0);
 });
+
+// Sum of ALL spendings regardless of period (for base budget display)
+const allTimeSpendingsSum = computed(() => {
+  return data.data.spendings
+      .filter(s => IsSpending(s))
+      .reduce((acc, s) => acc + Math.abs(s.amount), 0);
+});
+
+// Sum of ALL incomes regardless of period (for base budget display)
+const allTimeIncomesSum = computed(() => {
+  return data.data.spendings
+      .filter(s => !IsSpending(s))
+      .reduce((acc, s) => acc + s.amount, 0);
+});
+
+// Base budget adjusted by all-time transactions (budget - spendings + incomes)
+const baseBudgetAfterAllTime = computed(() => data.data.budget - allTimeSpendingsSum.value + allTimeIncomesSum.value);
 
 // Effective budget for calculations: base budget + incomes (do not persist to store)
 const effectiveBudget = computed(() => data.data.budget + incomesSum.value);
@@ -72,9 +94,9 @@ const leftBudget = computed(() => effectiveBudget.value - spendingsSum.value);
 // Today's budget to display, depends on spending mode
 const todayBudget = computed(() => {
   return Math.round(
-    data.data.spendingMode === 'period'
-      ? (effectiveBudget.value / devisor.value) - spendingsSum.value
-      : leftBudget.value / devisor.value
+      data.data.spendingMode === 'period'
+          ? (effectiveBudget.value / devisor.value) - spendingsSum.value
+          : leftBudget.value / devisor.value
   );
 });
 </script>
@@ -88,12 +110,14 @@ const todayBudget = computed(() => {
       <div v-else class="flex-center flex-col h-40">
         <!-- today budget -->
         <h1 class="text-xl text-muted-foreground">На {{ data.data.periodType == 'day' ? 'сегодня' : 'неделю' }}</h1>
-        <!-- TODO: store devisor in account data -->
         <h1 class="text-7xl money text-primary" :class="{'!text-destructive':todayBudget <= 0}">{{ todayBudget }}</h1>
 
         <!-- budget -->
-        <!-- TODO: refactor it to LEFT_BUDGET/BUDGET -->
-        <h2 class="text-md money"><span class="money mr-[1ch]">{{ leftBudget }}</span> / {{ data.data.budget }}</h2>
+        <h2 class="text-md money"><span class="money mr-[1ch]"
+                                        :class="{'!text-emerald-500':baseBudgetAfterAllTime > data.data.budget,
+                                        '!text-destructive':baseBudgetAfterAllTime <= 0}">{{
+            baseBudgetAfterAllTime
+          }}</span> / {{ data.data.budget }}</h2>
       </div>
 
       <div class="flex gap-2">

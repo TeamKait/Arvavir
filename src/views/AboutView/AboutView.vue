@@ -48,7 +48,7 @@ const selected = ref([false, false, false])
       Создать легкое и интуитивно понятное web-приложение, чтобы помочь эффективнее управлять деньгами
     </Paragraph>
     <Paragraph label="Стек">
-      <NumberedList :items="['Vue.js', 'TailwindCSS', 'Pinia', 'TypeScript', 'Shadcn-Vue', 'Iconify', 'Chart.js', 'Firestore']"/>
+      <NumberedList :items="['Vue.js', 'TailwindCSS', 'Pinia', 'TypeScript', 'Shadcn-Vue', 'Iconify', 'Chart.js', 'Firebase']"/>
     </Paragraph>
   </div>
 </template>

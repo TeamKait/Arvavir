@@ -62,7 +62,8 @@ export const useAccountData = defineStore('account data', () => {
     async function NewSpending(defaultValues: number[] = [0, 0]) {
         const results = await dialog.DialogResults('Новая трата',
             new DialogComponent(ChangeBudgetDialog,
-                {defaultValue: defaultValues[0], options: [-500, -100, -50, 0, 50, 100, 500], mode: 'change'}),
+                {defaultValue: defaultValues[0],
+                    options: [-500, -100, -50, 0, 50, 100, 500], mode: 'change'}),
             new DialogComponent(SpendingSelect,
                 {defaultValue: defaultValues[1]}))
 
