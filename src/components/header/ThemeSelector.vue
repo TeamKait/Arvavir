@@ -20,8 +20,6 @@ const russianModes = {
   'auto': 'авто'
 }
 
-// TODO: fetch from UserPrefs
-const data = useAccountData();
 const open = ref(false);
 
 function GetIcon(mode: ColorTheme): string {
@@ -33,30 +31,24 @@ function GetTitle(mode: ColorTheme): string {
 }
 
 function SetTheme(theme: ColorTheme) {
-  data.data.colorTheme = theme
   mode.value = theme
 }
 
 const mode = useColorMode({
   disableTransition: false
 });
-
-// Keep theme in sync with store changes (login/logout/refresh)
-watch(() => data.data.colorTheme, (val) => {
-  mode.value = val
-}, { immediate: true })
 </script>
 
 <template>
   <div class="relative" v-click-outside="() => open = false">
     <!-- open menu button -->
     <Button @click="open = !open"
-            :icon="GetIcon(data.data.colorTheme)"
+            :icon="GetIcon(mode)"
             size="icon"
             class="size-13"
             variant="outline">
       <SafeIcon
-          :icon="GetIcon(data.data.colorTheme)"
+          :icon="GetIcon(mode)"
           class="transition-transform duration-500 size-6"
           :class="{'rotate-360':open}"/>
     </Button>
@@ -64,10 +56,10 @@ watch(() => data.data.colorTheme, (val) => {
     <!-- select theme -->
     <transition name="menu">
       <Card v-if="open" class="absolute gap-3 p-4 -left-20 mt-2 z-999">
-        <IconButton v-for="(icon, mode) in modes"
-                    @click="() => SetTheme(mode)"
+        <IconButton v-for="(icon, m) in modes"
+                    @click="() => SetTheme(m)"
                     :icon="icon"
-                    :variant="data.data.colorTheme == mode ? 'default' : 'outline'"
+                    :variant="m == mode ? 'default' : 'outline'"
                     class="flex justify-between">
           {{ GetTitle(mode) }}
         </IconButton>

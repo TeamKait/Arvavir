@@ -14,7 +14,7 @@ const props = defineProps({
   defaultValue: {type: Number, required: false},
 })
 
-const selected = defineModel<number>({default: 0});
+const selected = defineModel<number>();
 
 onMounted(() => {
   selected.value = props.defaultValue ?? 0
