@@ -61,7 +61,7 @@ const mode = useColorMode({
                     :icon="icon"
                     :variant="m == mode ? 'default' : 'outline'"
                     class="flex justify-between">
-          {{ GetTitle(mode) }}
+          {{ GetTitle(m) }}
         </IconButton>
       </Card>
     </transition>
